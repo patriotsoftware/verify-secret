@@ -1,6 +1,6 @@
-name: "ReSharper"
+name: "VerifySecret"
 author: DevOps
-description: Run ReSharper
+description: Run Secret Verifier
 
 inputs:
   json-file: 
