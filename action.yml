@@ -9,9 +9,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-   - name: Python 3
+    - name: Python 3
       uses: actions/setup-python@v1
-      with:
+      with: 
         python-version: 3.9
     - name: Requirements
       run: |
@@ -19,7 +19,7 @@ runs:
       shell: bash
     - id: verify-secret-action
       env:
-        INPUTS_: ${{ inputs.json-file }}
+        INPUTS_JSON_FILE: ${{ inputs.json-file }}
       run: ${{ github.action_path }}/action.py
       shell: bash
 
