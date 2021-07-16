@@ -25,5 +25,5 @@ jobs:
       - name: Run Secret Verifier
         uses: ./
         with:
-          json-file: test.json
+          json-file: ./test.json
         
