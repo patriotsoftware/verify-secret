@@ -12,6 +12,6 @@ runs:
     - id: verify-secret-action
       env:
         INPUTS_JSON_FILE: ${{ inputs.json-file }}
-      run: ${{ github.action_path }}/action.py
+      run: python3 ${{ github.action_path }}/action.py
       shell: bash
 
