@@ -17,8 +17,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Python 3
+        uses: actions/setup-python@v1
+        with: 
+          python-version: 3.9
+
+      - name: List Files
+        run: | 
+          ls -la
+
       - name: Run Secret Verifier
         uses: ./
         with:
-          json-file: test.json
+          json-file: ./test.json
         
