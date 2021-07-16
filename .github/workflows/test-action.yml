@@ -21,7 +21,11 @@ jobs:
         uses: actions/setup-python@v1
         with: 
           python-version: 3.9
-                 
+
+      - name: List Files
+        run: | 
+          ls -la
+
       - name: Run Secret Verifier
         uses: ./
         with:
