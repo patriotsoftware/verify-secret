@@ -30,7 +30,7 @@ def get_secret(secret_value):
             binary_secret_data = get_secret_value_response['SecretBinary']
 
 
-file = os.environ['JSON-FILE']
+file = os.environ['INPUTS_JSON_FILE']
 json_data=open(file)
 jdata = json.load(json_data)
 
