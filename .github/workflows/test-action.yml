@@ -14,11 +14,11 @@ jobs:
     name: Test Verify Secret
     runs-on: ubuntu-20.04
 
-  steps:
-    - uses: actions/checkout@v2
+    steps:
+      - uses: actions/checkout@v2
 
-    - name: Run Secret Verifier
-      uses: ./
-      with:
-        json-file: test.json
+      - name: Run Secret Verifier
+        uses: ./
+        with:
+          json-file: test.json
         
