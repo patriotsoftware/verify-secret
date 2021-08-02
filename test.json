@@ -1,6 +1,13 @@
 {
-  "ConnectionStringSecretId": "NameOfSecret",
-  "TESTSecretID": "Secret",
-  "SECRET": "dsfds"
+  "SECRET": "LiquibaseStandardTemplateDatabaseConnectionSettings",
+  "Amazon": {
+    "SQS": {
+      "QueueUrl": "https://sqs.us-east-1.amazonaws.com/someQueue"
+    }
+  },
+  "HealthChecks": {
+    "Startup": {
+      "Enabled": true
+    }
+  }
 }
-

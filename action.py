@@ -5,6 +5,7 @@ import sys
 import boto3
 import os
 from botocore.exceptions import ClientError
+import codecs
 
 def get_secret(secret_value):
     secret_name = secret_value
@@ -32,6 +33,7 @@ def get_secret(secret_value):
 
 file = os.environ['INPUTS_JSON_FILE']
 json_data=open(file)
+# json_data=codecs.decode(open(file), 'utf-8-sig')
 jdata = json.load(json_data)
 
 substring = "secret"
