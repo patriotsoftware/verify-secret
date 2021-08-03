@@ -32,14 +32,10 @@ def get_secret(secret_value):
 
 
 file = os.environ['INPUTS_JSON_FILE']
-json_data=open(file)
-# json_data=codecs.decode(open(file), 'utf-8-sig')
-jdata = json.load(json_data)
+jdata = json.load(codecs.open(file, 'r', 'utf-8-sig'))
 
 substring = "secret"
 
 for key, value in jdata.items():
     if re.search(substring, key, re.IGNORECASE):
         get_secret(value)
-
-
