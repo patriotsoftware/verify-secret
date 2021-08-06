@@ -5,6 +5,7 @@ import sys
 import boto3
 import os
 from botocore.exceptions import ClientError
+import codecs
 
 def get_secret(secret_value):
     secret_name = secret_value
@@ -31,13 +32,10 @@ def get_secret(secret_value):
 
 
 file = os.environ['INPUTS_JSON_FILE']
-json_data=open(file)
-jdata = json.load(json_data)
+jdata = json.load(codecs.open(file, 'r', 'utf-8-sig'))
 
 substring = "secret"
 
 for key, value in jdata.items():
     if re.search(substring, key, re.IGNORECASE):
         get_secret(value)
-
-
