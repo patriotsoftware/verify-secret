@@ -1,5 +1,9 @@
 {
   "ConnectionStringSecretId": "NameOfSecret",
   "TESTSecretID": "Secret",
-  "SECRET": "dsfds"
+  "SECRET": "dsfds",
+  "Settings": {
+    "RunningLocally": true,
+    "IsLocalOrDevelopmentEnvironment": true
+  }
 }
