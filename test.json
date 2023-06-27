@@ -1,9 +1,21 @@
 {
-  "ConnectionStringSecretId": "NameOfSecret",
-  "TESTSecretID": "Secret",
-  "SECRET": "dsfds",
+  "ConnectionStringSecretId": "credsSecret",
+  "TESTSecretID": "credsSecret",
+  "SECRET": "credsSecret",
   "Settings": {
     "RunningLocally": true,
-    "IsLocalOrDevelopmentEnvironment": true
+    "IsLocalOrDevelopmentEnvironment": true,
+    "TestCredentials": {
+      "SuperSecretCred": "credsSecret",
+      "password": "password"
+    },
+    "NestedTestCredentials": {
+      "service1": {
+        "credSecret": "credsSecret"
+      },
+      "service2": {
+        "credSecret": "credsSecret"
+      }
+    }
   }
 }
