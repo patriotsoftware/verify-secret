@@ -32,11 +32,12 @@ def get_secret(secret_value):
 
 def iterateObject(object):
     for key, value in object.items():
-        if re.search(substring, key, re.IGNORECASE):
-            get_secret(value)
         if type(value) == dict:
             iterateObject(value)
-    
+        if re.search(substring, key, re.IGNORECASE) and type(value) == str:
+            get_secret(value)
+        if re.search(substring, key, re.IGNORECASE) and type(value) != str:
+            print(f"Secret value is not a string: {key}")
 
 file = os.environ['INPUTS_JSON_FILE']
 jdata = json.load(codecs.open(file, 'r', 'utf-8-sig'))
