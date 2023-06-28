@@ -9,7 +9,7 @@
       "SuperSecretCred": "credsSecret",
       "password": "password"
     },
-    "NestedTestCredentials": {
+    "NestedTestSecretCredentials": {
       "service1": {
         "credSecret": "credsSecret"
       },
