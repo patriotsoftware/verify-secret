@@ -1,32 +1,53 @@
 name: Secret-Verify-test-action
-on: 
+on:
   push:
     branches:
       - "*"
       - "!main"
   workflow_dispatch:
-    inputs:
-      json-file:
-        description: 'Json file to parse looking for the keyword: secret'
-        required: true
 jobs:
   test-action:
     name: Test Verify Secret
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    env:
+      AWS_ENDPOINT_URL: http://127.0.0.1:5000
+      AWS_ACCESS_KEY_ID: testing
+      AWS_SECRET_ACCESS_KEY: testing
+      AWS_DEFAULT_REGION: us-east-1
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
 
       - name: Python 3
-        uses: actions/setup-python@v1
-        with: 
-          python-version: 3.9
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
 
-      - name: List Files
-        run: | 
-          ls -la
+      - name: Start mock Secrets Manager
+        run: |
+          pip install "moto[server]" boto3
+          moto_server -p 5000 > moto.log 2>&1 &
+          for _ in $(seq 1 30); do curl -s "$AWS_ENDPOINT_URL" > /dev/null && break; sleep 1; done
+          python -c "import boto3; boto3.client('secretsmanager').create_secret(Name='credsSecret', SecretString='{}')"
 
-      - name: Run Secret Verifier
+      - name: Verify test.json
         uses: ./
         with:
           json-file: ./test.json
-        
+
+      - name: Verify appsettings with comments, trailing commas and empty values
+        uses: ./
+        with:
+          json-file: ./tests/appsettings-jsonc.json
+
+      - name: Verify missing secret
+        id: missing
+        continue-on-error: true
+        uses: ./
+        with:
+          json-file: ./tests/missing-secret.json
+
+      - name: Missing secret must fail
+        if: ${{ steps.missing.outcome != 'failure' }}
+        run: |
+          echo "::error::verify-secret passed for a secret that does not exist"
+          exit 1
